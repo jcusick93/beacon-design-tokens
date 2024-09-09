@@ -4,7 +4,7 @@
   "description": "The design tokens for Beacon",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "fetch": "node ./fetchTokens.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/jcusick93/beacon-design-tokens/issues"
   },
-  "homepage": "https://github.com/jcusick93/beacon-design-tokens#readme"
+  "homepage": "https://github.com/jcusick93/beacon-design-tokens#readme",
+  "devDependencies": {
+    "axios": "^1.7.7"
+  }
 }
