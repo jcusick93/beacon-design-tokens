@@ -1,0 +1,19 @@
+{
+  "name": "beacon-design-tokens",
+  "version": "1.0.0",
+  "description": "The design tokens for Beacon",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jcusick93/beacon-design-tokens.git"
+  },
+  "author": "Josh Cusick",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jcusick93/beacon-design-tokens/issues"
+  },
+  "homepage": "https://github.com/jcusick93/beacon-design-tokens#readme"
+}
