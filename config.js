@@ -1,38 +1,74 @@
 import { register } from '@tokens-studio/sd-transforms';
 import StyleDictionary from 'style-dictionary';
 
-// Register custom transforms and filters
+// will register them on StyleDictionary object
+// that is installed as a dependency of this package.
+// locate if file
 register(StyleDictionary);
 
-// Helper function to extract file name from path
-function getFileName(filePath) {
-  return filePath.split('/').pop().replace('.json', '');  // Extract file name without extension
-}
-
-const fileNames = ['global.json', 'light-theme.json', 'dark-theme.json'];  // List of your token files
-
-// Create file configurations dynamically
-const fileConfigs = fileNames.map(fileName => ({
-  destination: `${getFileName(fileName)}.css`,  // Generate destination file name
-  format: 'css/variables',
-  filter: token => token.filePath.includes(fileName)  // Filter tokens based on file name
-}));
-
-const sd = StyleDictionary.extend({
-  source: ['tokens/**/*.json'],
-  preprocessors: ['tokens-studio'], // Ensure this is set explicitly
-  platforms: {
-    css: {
-      transformGroup: 'tokens-studio', // Apply the tokens-studio transformGroup
-      transforms: ['name/kebab'], // Apply name transform for generating CSS variable names
-      buildPath: 'build/css/',
-      files: fileConfigs  // Use dynamically created file configurations
-    }
+StyleDictionary.registerFilter({
+  name: 'isGlobal',
+  filter: function(token) {
+    const fileName = token.filePath.split('/').pop();  // Get the actual file name
+    return fileName === 'global.json';
   }
 });
 
-// Build the tokens
-(async () => {
-  await sd.cleanAllPlatforms();
-  await sd.buildAllPlatforms();
-})();
+StyleDictionary.registerFilter({
+  name: 'isLightTheme',
+  filter: function(token) {
+    const fileName = token.filePath.split('/').pop();  // Get the actual file name
+    console.log(fileName)
+    return fileName === 'light-theme.json';
+  }
+});
+
+StyleDictionary.registerFilter({
+  name: 'isDarkTheme',
+  filter: function(token) {
+    const fileName = token.filePath.split('/').pop();  // Get the actual file name
+    console.log(fileName)
+    return fileName === 'dark-theme.json';
+  }
+});
+
+
+
+
+const sd = new StyleDictionary({
+  // make sure to have source match your token files!
+  // be careful about accidentally matching your package.json or similar files that are not tokens
+  source: ['tokens/**/*.json'],
+  preprocessors: ['tokens-studio'], // <-- since 0.16.0 this must be explicit
+  platforms: {
+    css: {
+      transformGroup: 'tokens-studio', // <-- apply the tokens-studio transformGroup to apply all transforms
+      transforms: ['name/kebab'], // <-- add a token name transform for generating token names, default is camel
+      buildPath: 'build/css/',
+      files: [
+        {
+          destination: 'global.css',
+          format: 'css/variables',
+          filter: token => token.filePath.includes('glo')
+     
+        },
+        {
+          destination: 'light-theme.css',
+          format: 'css/variables',
+          filter: token => token.filePath.includes('light')
+        },
+        {
+          destination: 'dark-theme.css',
+          format: 'css/variables',
+          filter: token => token.filePath.includes('dark')
+        },
+    
+    
+        
+      ],
+    },
+  },
+});
+
+await sd.cleanAllPlatforms();
+await sd.buildAllPlatforms();
