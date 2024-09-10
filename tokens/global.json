@@ -1,0 +1,16 @@
+{
+    "global": {
+        "color": {
+          "red": {
+            "10": {
+              "$type": "color",
+              "$value": "#ffbbbb"
+            },
+            "80": {
+              "$type": "color",
+              "$value": "#541010"
+            }
+          }
+        }
+      }
+}

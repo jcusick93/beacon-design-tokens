@@ -1,0 +1,13 @@
+{
+  "theme": {
+    "color": {
+      "background": {
+        "error": {
+          "$type": "color",
+          "$value": "{global.color.red.10}"
+          
+        }
+      }
+    }
+  }
+}

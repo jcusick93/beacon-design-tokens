@@ -1,0 +1,32 @@
+{
+    "source": ["tokens/**/*.json"],
+    "platforms": {
+      "scss-global": {
+        "transformGroup": "scss",
+        "buildPath": "./dist/tokens/",
+        "files": [
+          {
+            "destination": "global.scss",
+            "format": "scss/variables",
+            "filter": {
+              "type": "global"  
+            }
+          }
+        ]
+      },
+      "scss-theme": {
+        "transformGroup": "scss",
+        "buildPath": "./dist/tokens/",
+        "files": [
+          {
+            "destination": "{theme-name}.scss",
+            "format": "scss/variables",
+            "filter": {
+              "type": "theme" 
+            }
+          }
+        ]
+      }
+    }
+  }
+  
