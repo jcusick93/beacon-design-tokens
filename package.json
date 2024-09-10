@@ -18,5 +18,8 @@
   "homepage": "https://github.com/jcusick93/beacon-design-tokens#readme",
   "devDependencies": {
     "axios": "^1.7.7"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5"
   }
 }

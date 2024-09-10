@@ -1,7 +1,9 @@
 const axios = require('axios');
+require('dotenv').config();
 
-const figmaToken = 'figd_kCBwTAnpLscuIZPTi66s14wKWAalvqaYH2IJSP3_';
-const fileKey = 'exVarXASEUOODOdve81okt';
+const figmaToken = process.env.FIGMA_PAT;
+const fileKey = process.env.FIGMA_FILE_KEY;
+
 
 axios.get(`https://api.figma.com/v1/files/${fileKey}/variables/local`, {
     headers: {
