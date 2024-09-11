@@ -26,8 +26,9 @@ StyleDictionary.registerFilter({
 StyleDictionary.registerFilter({
   name: 'isDarkTheme',
   filter: function(token) {
-    const fileName = token.filePath.split('/').pop();  // Get the actual file name
-    console.log(fileName)
+    console.log('Token filePath:', token.filePath); // Log the entire file path
+    const fileName = token.filePath.split('/').pop();  
+    console.log('Extracted file name:', fileName); // Log the extracted file name
     return fileName === 'dark-theme.json';
   }
 });
@@ -49,18 +50,18 @@ const sd = new StyleDictionary({
         {
           destination: 'global.css',
           format: 'css/variables',
-          filter: token => token.filePath.includes('glo')
+          filter: "isGlobal"
      
         },
         {
           destination: 'light-theme.css',
           format: 'css/variables',
-          filter: token => token.filePath.includes('light')
+          filter: "isLightTheme"
         },
         {
           destination: 'dark-theme.css',
           format: 'css/variables',
-          filter: token => token.filePath.includes('dark')
+          filter: "isDarkTheme"
         },
     
     
