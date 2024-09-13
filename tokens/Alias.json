@@ -1,0 +1,14 @@
+{
+  "alias": {
+    "color": {
+      "neutral": {
+        "text": {
+          "default": {
+            "value": "{global.color.general.neutral.900}",
+            "type": "color"
+          }
+        }
+      }
+    }
+  }
+}

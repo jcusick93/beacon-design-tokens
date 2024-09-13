@@ -6,32 +6,6 @@ import StyleDictionary from 'style-dictionary';
 // locate if file
 register(StyleDictionary);
 
-StyleDictionary.registerFilter({
-  name: 'isGlobal',
-  filter: function(token) {
-    const fileName = token.filePath.split('/').pop();  // Get the actual file name
-    return fileName === 'global.json';
-  }
-});
-
-StyleDictionary.registerFilter({
-  name: 'isLightTheme',
-  filter: function(token) {
-    const fileName = token.filePath.split('/').pop();  // Get the actual file name
-    console.log(fileName)
-    return fileName === 'light-theme.json';
-  }
-});
-
-StyleDictionary.registerFilter({
-  name: 'isDarkTheme',
-  filter: function(token) {
-    console.log('Token filePath:', token.filePath); // Log the entire file path
-    const fileName = token.filePath.split('/').pop();  
-    console.log('Extracted file name:', fileName); // Log the extracted file name
-    return fileName === 'dark-theme.json';
-  }
-});
 
 
 
@@ -39,7 +13,7 @@ StyleDictionary.registerFilter({
 const sd = new StyleDictionary({
   // make sure to have source match your token files!
   // be careful about accidentally matching your package.json or similar files that are not tokens
-  source: ['tokens/**/*.json'],
+  source: ['./tokens/**/*.json'],
   preprocessors: ['tokens-studio'], // <-- since 0.16.0 this must be explicit
   platforms: {
     css: {
@@ -48,22 +22,22 @@ const sd = new StyleDictionary({
       buildPath: 'build/css/',
       files: [
         {
+          destination: 'base.css',
+          format: 'css/variables',
+          filter: (token) => token.filePath.indexOf(`Base`) > -1,
+        },
+
+        {
           destination: 'global.css',
           format: 'css/variables',
-          filter: "isGlobal"
-     
+          filter: (token) => token.filePath.indexOf(`Global`) > -1,
         },
         {
-          destination: 'light-theme.css',
+          destination: 'alias.css',
           format: 'css/variables',
-          filter: "isLightTheme"
+          filter: (token) => token.filePath.indexOf(`Alias`) > -1,
         },
-        {
-          destination: 'dark-theme.css',
-          format: 'css/variables',
-          filter: "isDarkTheme"
-        },
-    
+
     
         
       ],
